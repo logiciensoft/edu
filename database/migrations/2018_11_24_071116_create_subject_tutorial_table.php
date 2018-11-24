@@ -17,6 +17,16 @@ class CreateSubjectTutorialTable extends Migration
             $table->unsignedInteger('tutorial_id')->index();
             $table->unsignedInteger('subject_id')->index();
         });
+
+        Schema::table('subject_tutorial', function (Blueprint $table) {
+            $table->foreign('tutorial_id')
+                ->references('id')->on('tutorials')
+                ->onDelete('cascade');
+
+            $table->foreign('subject_id')
+                ->references('id')->on('subjects')
+                ->onDelete('cascade');
+        });
     }
 
     /**

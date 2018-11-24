@@ -14,6 +14,18 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')
-    ->get('/user', function (Request $request) {
-        return $request->user();
-    });
+    ->namespace('Api')
+    ->group(function (){
+
+    Route::get('/user', function (Request $request) { return $request->user(); });
+
+    //COURSE ROUTES
+    Route::prefix('courses')
+        ->group(function (){
+            Route::get('/', 'CourseController@index');
+            Route::post('/', 'CourseController@store');
+            Route::get('{id}', 'CourseController@show');
+            Route::put('{id}', 'CourseController@update');
+            Route::delete('{id}', 'CourseController@destroy');
+        });
+});

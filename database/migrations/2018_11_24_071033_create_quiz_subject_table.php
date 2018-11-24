@@ -17,6 +17,16 @@ class CreateQuizSubjectTable extends Migration
             $table->unsignedInteger('quiz_id')->index();
             $table->unsignedInteger('subject_id')->index();
         });
+
+        Schema::table('quiz_subject', function (Blueprint $table) {
+            $table->foreign('quiz_id')
+                ->references('id')->on('quizzes')
+                ->onDelete('cascade');
+
+            $table->foreign('subject_id')
+                ->references('id')->on('subjects')
+                ->onDelete('cascade');
+        });
     }
 
     /**

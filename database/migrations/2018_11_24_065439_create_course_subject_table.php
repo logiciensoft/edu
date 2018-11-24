@@ -17,6 +17,17 @@ class CreateCourseSubjectTable extends Migration
             $table->unsignedInteger('course_id')->index();
             $table->unsignedInteger('subject_id')->index();
         });
+
+        Schema::table('course_subject', function (Blueprint $table) {
+            $table->foreign('course_id')
+                ->references('id')->on('courses')
+                ->onDelete('cascade');
+
+            $table->foreign('subject_id')
+                ->references('id')->on('subjects')
+                ->onDelete('cascade');
+        });
+
     }
 
     /**
