@@ -17,8 +17,14 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('quiz_id')->index();
             $table->string('question')->index();
-            $table->json('response');
+            $table->json('responses');
             $table->timestamps();
+        });
+
+        Schema::table('questions', function (Blueprint $table) {
+            $table->foreign('quiz_id')
+                ->references('id')->on('quizzes')
+                ->onDelete('cascade');
         });
     }
 

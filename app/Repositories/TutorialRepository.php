@@ -15,18 +15,18 @@ class TutorialRepository
 
     public function create($content)
     {
-        $subject = Tutorial::create(['content'=>$content]);
+        $tutorial = Tutorial::create(['content'=>$content]);
 
-        return $subject;
+        return $tutorial;
     }
 
     public function update($id, $content)
     {
-        $subject = Tutorial::findOrFail($id);
+        $tutorial = Tutorial::findOrFail($id);
 
-        $subject->update(['content'=>$content]);
+        $tutorial->update(['content'=>$content]);
 
-        return $subject;
+        return $tutorial;
     }
 
     public function get($id)

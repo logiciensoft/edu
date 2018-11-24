@@ -222,7 +222,6 @@
     </pre>
 <br />
 
-
 ### * Subjects
 ##### ** _Get All Subjects_
 <b>End Point</b>: /api/subjects <br />
@@ -474,6 +473,147 @@
     <pre>
     $.ajax({
         url: "http://localhost:8000/api/tutorials/3",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'DELETE',
+        success: function(data) {
+            console.log(data);
+        }
+    });
+    </pre>
+<br />
+
+### * Quizzes
+##### ** _Get All Quizzes_
+<b>End Point</b>: /api/quizzes <br />
+<b>Method</b>: GET <br />
+<b>Example</b>:
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/quizzes",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'GET',
+        success: function(data) {
+            console.log(data);
+        }
+    });
+</pre>
+<br />
+
+##### ** _Get a specific quiz details_
+<b>End Point</b>: /api/quizzes/{id} <br />
+<b>Method</b>: GET <br />
+<b>Example</b>:
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/quizzes/1",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'GET',
+        success: function(data) {
+            console.log(data);
+            $('#content').html(JSON.stringify(data));
+        }
+    });
+    </pre>
+<br />
+
+##### ** _Create a new quiz_
+<b>End Point</b>: /api/quizzes <br />
+<b>Method</b>: POST <br />
+<b>Request Parameters</b>:
+<table>
+<tr>
+    <td>name</td>
+    <td>The name/description of the quiz</td>
+</tr>
+<tr>
+    <td>questions</td>
+    <td>The list of questions assigned that contains the quiz</td>
+</tr>
+</table>
+<b>Example</b>:<br />
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/quizzes",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'POST',
+         data: {
+            "name": "1st Evaluation",
+            "questions": [
+                {
+                    "question": "What is the fastest car in the world?",
+                    "responses": ["Lamborgnini", "Kia", "Trotro"]
+                },
+                {
+                    "question": "Who is the current president of Ghana?",
+                    "responses": ["John Mahama", "Nana Akufo-Addo"]
+                }
+            ]
+         },
+        success: function(data) {
+            console.log(data);
+        }
+    });
+    </pre>
+<br />
+
+##### ** _Update an existing quiz_
+<b>End Point</b>: /api/quizzes/{id} <br />
+<b>Method</b>: PUT <br />
+<b>Request Parameters</b>:
+<table>
+<tr>
+    <td>name</td>
+    <td>The name/description of the quiz</td>
+</tr>
+<tr>
+    <td>questions</td>
+    <td>The list of questions assigned that contains the quiz</td>
+</tr>
+</table>
+<b>Example</b>:<br />
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/quizzes/4",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'PUT',
+         data: {
+            "name": "1st Evaluation (GK)",
+            "questions": [
+                {
+                    "question": "What is the fastest car in the world?",
+                    "responses": ["Lamborgnini", "Kia", "Trotro"]
+                }
+            ]
+        },
+        success: function(data) {
+            console.log(data);
+        }
+    });
+    </pre>
+<br />
+
+##### ** _Delete an existing quiz_
+<b>End Point</b>: /api/quizzes/{id} <br />
+<b>Method</b>: DELETE <br />
+<b>Example</b>:<br />
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/quizzes/3",
         beforeSend: function(xhr) {
             xhr.setRequestHeader("Accept", "application/json");
             xhr.setRequestHeader("Authorization", "Bearer $_access_token");

@@ -48,4 +48,14 @@ Route::middleware('auth:api')
                 Route::put('{id}', 'TutorialController@update');
                 Route::delete('{id}', 'TutorialController@destroy');
             });
+
+        //QUIZZES ROUTES
+        Route::prefix('quizzes')
+            ->group(function (){
+                Route::get('/', 'QuizController@index');
+                Route::post('/', 'QuizController@store');
+                Route::get('{id}', 'QuizController@show');
+                Route::put('{id}', 'QuizController@update');
+                Route::delete('{id}', 'QuizController@destroy');
+            });
     });

@@ -45,19 +45,19 @@ class QuizzesSeeder extends Seeder
         DB::table('questions')->insert([
            'quiz_id' => $mid_sem_quiz_id,
             'question' => 'The higher you go, the cooler it becomes?',
-            'response' => json_encode(['True', 'False'])
+            'responses' => json_encode(['True', 'False'])
         ]);
 
         DB::table('questions')->insert([
             'quiz_id' => $mid_sem_quiz_id,
             'question' => 'Latitudes move which direction on a map?',
-            'response' => json_encode(['East to West', 'North to South'])
+            'responses' => json_encode(['East to West', 'North to South'])
         ]);
 
         DB::table('questions')->insert([
             'quiz_id' => $mid_sem_quiz_id,
             'question' => 'What is the largest continent in the world?',
-            'response' => json_encode(['America', 'Asia', 'Europe', 'Africa'])
+            'responses' => json_encode(['America', 'Asia', 'Europe', 'Africa'])
         ]);
 
 
@@ -66,19 +66,19 @@ class QuizzesSeeder extends Seeder
         DB::table('questions')->insert([
             'quiz_id' => $end_sem_quiz_id,
             'question' => 'What is the fastest land animal?',
-            'response' => json_encode(['Jaguar', 'Leopard', 'Cheetah'])
+            'responses' => json_encode(['Jaguar', 'Leopard', 'Cheetah'])
         ]);
 
         DB::table('questions')->insert([
             'quiz_id' => $end_sem_quiz_id,
             'question' => 'What is the largest planet in our galaxy?',
-            'response' => json_encode(['Earth', 'Satan', 'Jupiter'])
+            'responses' => json_encode(['Earth', 'Satan', 'Jupiter'])
         ]);
 
         DB::table('questions')->insert([
             'quiz_id' => $end_sem_quiz_id,
             'question' => 'Latitudes move which direction on a map?',
-            'response' => json_encode(['East to West', 'North to South'])
+            'responses' => json_encode(['East to West', 'North to South'])
         ]);
     }
 }
