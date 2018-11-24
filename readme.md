@@ -368,3 +368,121 @@
     </pre>
 <br />
 
+
+### * Tutorials
+##### ** _Get All Tutorials_
+<b>End Point</b>: /api/tutorials <br />
+<b>Method</b>: GET <br />
+<b>Example</b>:
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/tutorials",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'GET',
+        success: function(data) {
+            console.log(data);
+        }
+    });
+</pre>
+<br />
+
+##### ** _Get a specific tutorial details_
+<b>End Point</b>: /api/tutorials/{id} <br />
+<b>Method</b>: GET <br />
+<b>Example</b>:
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/tutorials/1",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'GET',
+        success: function(data) {
+            console.log(data);
+            $('#content').html(JSON.stringify(data));
+        }
+    });
+    </pre>
+<br />
+
+##### ** _Create a new tutorial_
+<b>End Point</b>: /api/tutorials <br />
+<b>Method</b>: POST <br />
+<b>Request Parameters</b>:
+<table>
+<tr>
+    <td>content</td>
+    <td>The content of the tutorial</td>
+</tr>
+</table>
+<b>Example</b>:<br />
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/tutorials",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'POST',
+         data: {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lorem est, blandit sed risus non, semper pretium urna. Mauris maximus, mi eget hendrerit ultricies, lectus ante fermentum tellus, non sagittis diam felis ultricies mauris. Cras consequat lacinia malesuada."
+        },
+        success: function(data) {
+            console.log(data);
+        }
+    });
+    </pre>
+<br />
+
+##### ** _Update an existing tutorial_
+<b>End Point</b>: /api/tutorials/{id} <br />
+<b>Method</b>: PUT <br />
+<b>Request Parameters</b>:
+<table>
+<tr>
+    <td>content</td>
+    <td>The content of the tutorial</td>
+</tr>
+</table>
+<b>Example</b>:<br />
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/tutorials/3",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'PUT',
+         data: {
+            "content": "Nam dapibus in magna a euismod. Phasellus et tincidunt libero, eu gravida tellus. In gravida est velit, sed rhoncus est maximus faucibus. Praesent sed arcu imperdiet, malesuada tellus vel, efficitur nulla."
+        },
+        success: function(data) {
+            console.log(data);
+        }
+    });
+    </pre>
+<br />
+
+##### ** _Delete an existing tutorial_
+<b>End Point</b>: /api/tutorials/{id} <br />
+<b>Method</b>: DELETE <br />
+<b>Example</b>:<br />
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/tutorials/3",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'DELETE',
+        success: function(data) {
+            console.log(data);
+        }
+    });
+    </pre>
+<br />
+
