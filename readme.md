@@ -103,13 +103,12 @@
          type: 'GET',
         success: function(data) {
             console.log(data);
-            $('#content').html(JSON.stringify(data));
         }
     });
 </pre>
 <br />
 
-##### ** _Get a specific course_
+##### ** _Get a specific course details_
 <b>End Point</b>: /api/courses/{id} <br />
 <b>Method</b>: GET <br />
 <b>Example</b>:
@@ -123,7 +122,6 @@
          type: 'GET',
         success: function(data) {
             console.log(data);
-            $('#content').html(JSON.stringify(data));
         }
     });
     </pre>
@@ -157,7 +155,7 @@
         },
          type: 'POST',
          data: {
-            "name": "History",
+            "name": "MIT",
             "subject_ids": [1,2,3]
         },
         success: function(data) {
@@ -195,7 +193,7 @@
         },
          type: 'PUT',
          data: {
-            "name": "New History",
+            "name": "MIT-Course",
             "subject_ids": [1,4]
         },
         success: function(data) {
@@ -223,3 +221,150 @@
     });
     </pre>
 <br />
+
+
+### * Subjects
+##### ** _Get All Subjects_
+<b>End Point</b>: /api/subjects <br />
+<b>Method</b>: GET <br />
+<b>Example</b>:
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/subjects",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'GET',
+        success: function(data) {
+            console.log(data);
+        }
+    });
+</pre>
+<br />
+
+##### ** _Get a specific subject details_
+<b>End Point</b>: /api/subjects/{id} <br />
+<b>Method</b>: GET <br />
+<b>Example</b>:
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/subjects/1",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'GET',
+        success: function(data) {
+            console.log(data);
+            $('#content').html(JSON.stringify(data));
+        }
+    });
+    </pre>
+<br />
+
+##### ** _Create a new subject_
+<b>End Point</b>: /api/subjects <br />
+<b>Method</b>: POST <br />
+<b>Request Parameters</b>:
+<table>
+<tr>
+    <th>Name</th>
+    <th>Description</th>
+</tr>
+<tr>
+    <td>name</td>
+    <td>The name of the subject</td>
+</tr>
+<tr>
+    <td>tutorial_ids</td>
+    <td>The list of tutorial ID that belongs to the subject (Optional)</td>
+</tr>
+<tr>
+    <td>quiz_ids</td>
+    <td>The list of quiz ID that belongs to the subject (Optional)</td>
+</tr>
+</table>
+<b>Example</b>:<br />
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/subjects",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'POST',
+         data: {
+            "name": "C++",
+            "tutorial_ids": [1],
+            "quiz_ids": [1,2]
+        },
+        success: function(data) {
+            console.log(data);
+        }
+    });
+    </pre>
+<br />
+
+##### ** _Update an existing subject_
+<b>End Point</b>: /api/subjects/{id} <br />
+<b>Method</b>: PUT <br />
+<b>Request Parameters</b>:
+<table>
+<tr>
+    <th>Name</th>
+    <th>Description</th>
+</tr>
+<tr>
+    <td>name</td>
+    <td>The name of the subject</td>
+</tr>
+<tr>
+    <td>tutorial_ids</td>
+    <td>The list of tutorial ID that belongs to the subject (Optional)</td>
+</tr>
+<tr>
+    <td>quiz_ids</td>
+    <td>The list of quiz ID that belongs to the subject (Optional)</td>
+</tr>
+</table>
+<b>Example</b>:<br />
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/subjects/6",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'PUT',
+         data: {
+            "name": "Java",
+            "tutorial_ids": [1],
+            "quiz_ids": [1,3]
+        },
+        success: function(data) {
+            console.log(data);
+        }
+    });
+    </pre>
+<br />
+
+##### ** _Delete an existing subject_
+<b>End Point</b>: /api/subjects/{id} <br />
+<b>Method</b>: DELETE <br />
+<b>Example</b>:<br />
+    <pre>
+    $.ajax({
+        url: "http://localhost:8000/api/subjects/6",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Authorization", "Bearer $_access_token");
+        },
+         type: 'DELETE',
+        success: function(data) {
+            console.log(data);
+        }
+    });
+    </pre>
+<br />
+

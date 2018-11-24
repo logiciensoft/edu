@@ -19,7 +19,7 @@ Route::middleware('auth:api')
 
     Route::get('/user', function (Request $request) { return $request->user(); });
 
-    //COURSE ROUTES
+    //COURSES ROUTES
     Route::prefix('courses')
         ->group(function (){
             Route::get('/', 'CourseController@index');
@@ -27,5 +27,15 @@ Route::middleware('auth:api')
             Route::get('{id}', 'CourseController@show');
             Route::put('{id}', 'CourseController@update');
             Route::delete('{id}', 'CourseController@destroy');
+        });
+
+    //SUBJECTS ROUTES
+    Route::prefix('subjects')
+        ->group(function (){
+            Route::get('/', 'SubjectController@index');
+            Route::post('/', 'SubjectController@store');
+            Route::get('{id}', 'SubjectController@show');
+            Route::put('{id}', 'SubjectController@update');
+            Route::delete('{id}', 'SubjectController@destroy');
         });
 });
