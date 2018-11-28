@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Course;
+use App\Tutorial;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CourseTest extends TestCase
+class TutorialTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -48,64 +48,64 @@ class CourseTest extends TestCase
     }
 
     /** @test  */
-    public function can_list_all_courses()
+    public function can_list_all_tutorials()
     {
-        factory(Course::class, 3)->create();
+        factory(Tutorial::class, 3)->create();
 
-        $response = $this->http->get('/api/courses');
+        $response = $this->http->get('/api/tutorials');
 
         $response->assertStatus(200);
         $response->assertJsonCount(3);
     }
 
     /** @test  */
-    public function can_create_a_new_course()
+    public function can_create_a_new_tutorial()
     {
         $record = [
-            'name' => 'Programing'
+            'content' => 'My 1st Tutorial'
         ];
 
-        $response = $this->http->post('/api/courses', $record);
+        $response = $this->http->post('/api/tutorials', $record);
 
         $response->assertStatus(201);
         $response->assertJson($record);
     }
 
     /** @test  */
-    public function can_get_an_existing_course_details()
+    public function can_get_an_existing_tutorial_details()
     {
-        $course = factory(Course::class)->create();
+        $tutorial = factory(Tutorial::class)->create();
 
-        $response = $this->http->get("/api/courses/{$course->id}");
+        $response = $this->http->get("/api/tutorials/{$tutorial->id}");
 
         $response->assertStatus(200);
 
-        $response->assertJson($course->toArray());
+        $response->assertJson($tutorial->toArray());
     }
 
     /** @test  */
-    public function can_update_an_existing_course()
+    public function can_update_an_existing_tutorial()
     {
-        $course = factory(Course::class)->create();
+        $tutorial = factory(Tutorial::class)->create();
 
         $record = [
-            'name' => 'MIT'
+            'content' => 'My 2nd Tutorial'
         ];
 
-        $response = $this->http->put("/api/courses/{$course->id}", $record);
+        $response = $this->http->put("/api/tutorials/{$tutorial->id}", $record);
 
         $response->assertStatus(200);
         $response->assertJson($record);
     }
 
     /** @test  */
-    public function can_delete_an_existing_course()
+    public function can_delete_an_existing_tutorial()
     {
-        $course = factory(Course::class)->create();
+        $tutorial = factory(Tutorial::class)->create();
 
-        $response = $this->http->delete("/api/courses/{$course->id}");
+        $response = $this->http->delete("/api/tutorials/{$tutorial->id}");
 
         $response->assertStatus(200);
-        $this->assertEmpty(Course::find($course->id));
+        $this->assertEmpty(Tutorial::find($tutorial->id));
     }
 }

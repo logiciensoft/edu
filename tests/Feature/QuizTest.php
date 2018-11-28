@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Course;
+use App\Quiz;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CourseTest extends TestCase
+class QuizTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -48,64 +48,76 @@ class CourseTest extends TestCase
     }
 
     /** @test  */
-    public function can_list_all_courses()
+    public function can_list_all_quizzes()
     {
-        factory(Course::class, 3)->create();
+        factory(Quiz::class, 3)->create();
 
-        $response = $this->http->get('/api/courses');
+        $response = $this->http->get('/api/quizzes');
 
         $response->assertStatus(200);
         $response->assertJsonCount(3);
     }
 
     /** @test  */
-    public function can_create_a_new_course()
+    public function can_create_a_new_quiz()
     {
         $record = [
-            'name' => 'Programing'
+            'name' => '1st Evaluation',
+            'questions' => [
+                [
+                    "question" => "What is the fastest car in the world?",
+                    "responses" => ["Lamborgnini", "Mercedes", "Trotro"]
+                ]
+            ]
         ];
 
-        $response = $this->http->post('/api/courses', $record);
+        $response = $this->http->post('/api/quizzes', $record);
 
         $response->assertStatus(201);
-        $response->assertJson($record);
+        $response->assertJson(['name' => '1st Evaluation']);
     }
 
     /** @test  */
-    public function can_get_an_existing_course_details()
+    public function can_get_an_existing_quiz_details()
     {
-        $course = factory(Course::class)->create();
+        $quiz = factory(Quiz::class)->create();
 
-        $response = $this->http->get("/api/courses/{$course->id}");
+        $response = $this->http->get("/api/quizzes/{$quiz->id}");
 
         $response->assertStatus(200);
 
-        $response->assertJson($course->toArray());
+        $response->assertJson($quiz->toArray());
     }
 
     /** @test  */
-    public function can_update_an_existing_course()
+    public function can_update_an_existing_quiz()
     {
-        $course = factory(Course::class)->create();
+        $quiz = factory(Quiz::class)->create();
 
         $record = [
-            'name' => 'MIT'
+            'name' => '2nd Evaluation',
+            'questions' => [
+                [
+                    "question" => "What is the fastest car in the world?",
+                    "responses" => ["Lamborgnini", "Mercedes", "Trotro"]
+                ]
+            ]
         ];
 
-        $response = $this->http->put("/api/courses/{$course->id}", $record);
+        $response = $this->http->put("/api/quizzes/{$quiz->id}", $record);
 
         $response->assertStatus(200);
-        $response->assertJson($record);
+        $response->assertJson(['name' => '2nd Evaluation']);
     }
 
     /** @test  */
-    public function can_delete_an_existing_course()
+    public function can_delete_an_existing_quiz()
     {
-        $course = factory(Course::class)->create();
+        $quiz = factory(Quiz::class)->create();
 
-        $response = $this->http->delete("/api/courses/{$course->id}");
+        $response = $this->http->delete("/api/quizzes/{$quiz->id}");
 
         $response->assertStatus(200);
-        $this->assertEmpty(Course::find($course->id));
+        $this->assertEmpty(Quiz::find($quiz->id));
     }
 }

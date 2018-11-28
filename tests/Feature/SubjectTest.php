@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Course;
+use App\Subject;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CourseTest extends TestCase
+class SubjectTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -48,64 +48,64 @@ class CourseTest extends TestCase
     }
 
     /** @test  */
-    public function can_list_all_courses()
+    public function can_list_all_subjects()
     {
-        factory(Course::class, 3)->create();
+        factory(Subject::class, 3)->create();
 
-        $response = $this->http->get('/api/courses');
+        $response = $this->http->get('/api/subjects');
 
         $response->assertStatus(200);
         $response->assertJsonCount(3);
     }
 
     /** @test  */
-    public function can_create_a_new_course()
+    public function can_create_a_new_subject()
     {
         $record = [
-            'name' => 'Programing'
+            'name' => 'Maths'
         ];
 
-        $response = $this->http->post('/api/courses', $record);
+        $response = $this->http->post('/api/subjects', $record);
 
         $response->assertStatus(201);
         $response->assertJson($record);
     }
 
     /** @test  */
-    public function can_get_an_existing_course_details()
+    public function can_get_an_existing_subject_details()
     {
-        $course = factory(Course::class)->create();
+        $subject = factory(Subject::class)->create();
 
-        $response = $this->http->get("/api/courses/{$course->id}");
+        $response = $this->http->get("/api/subjects/{$subject->id}");
 
         $response->assertStatus(200);
 
-        $response->assertJson($course->toArray());
+        $response->assertJson($subject->toArray());
     }
 
     /** @test  */
-    public function can_update_an_existing_course()
+    public function can_update_an_existing_subject()
     {
-        $course = factory(Course::class)->create();
+        $subject = factory(Subject::class)->create();
 
         $record = [
-            'name' => 'MIT'
+            'name' => 'History'
         ];
 
-        $response = $this->http->put("/api/courses/{$course->id}", $record);
+        $response = $this->http->put("/api/subjects/{$subject->id}", $record);
 
         $response->assertStatus(200);
         $response->assertJson($record);
     }
 
     /** @test  */
-    public function can_delete_an_existing_course()
+    public function can_delete_an_existing_subject()
     {
-        $course = factory(Course::class)->create();
+        $subject = factory(Subject::class)->create();
 
-        $response = $this->http->delete("/api/courses/{$course->id}");
+        $response = $this->http->delete("/api/subjects/{$subject->id}");
 
         $response->assertStatus(200);
-        $this->assertEmpty(Course::find($course->id));
+        $this->assertEmpty(Subject::find($subject->id));
     }
 }
